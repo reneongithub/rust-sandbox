@@ -1,5 +1,5 @@
 
-use std::cmp::Ordering;
+use std::{cmp::Ordering, slice::SliceIndex};
 use crate::business;
 
 pub fn play_around(){
@@ -106,6 +106,17 @@ fn test_vector(){
 
     for str in &vec {
         println!("{}", str);
+    }
+
+    for i in 0..vec.len() {
+        println!("forinrange:{}",vec[i]);
+    }
+
+    for i in 0..vec.len()+1 {
+        match vec.get(i) {
+            Some(v) => println!("forinmatch:{}",v),
+            None => println!("forinmatch oob on index:{} --- caught and continue.. ;-)",i)
+        }
     }
 
     let val1 = vec.get(1);
