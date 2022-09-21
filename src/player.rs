@@ -1,6 +1,5 @@
 
-use std::{cmp::Ordering, slice::SliceIndex};
-use crate::business;
+use std::cmp::Ordering;
 
 pub fn play_around(){
 
@@ -13,6 +12,8 @@ pub fn play_around(){
     test_ordering();
 
     test_use_keyword();
+
+    test_module_concept();
 
     test_vector();
 
@@ -86,12 +87,50 @@ fn test_ordering() {
 fn test_use_keyword() {
     println!("test use_keyword__________________________");
 
+    use crate::business;
+
     business::do_some_business();
     business::helper::help_me("Rina");
     business::helper_exp::help_me("Dane");
     business::helper_help_me_exp("Ralf");
 
+
+    use business::Crud;
+    let cr2 = Crud{};
+
+    cr2.insert(&String::from("any"));
+
     println!("EOT use_keyword__________________________");
+}
+
+fn test_module_concept(){
+
+    println!("test module_concept__________________________");
+
+    use crate::business::Crud;
+    
+    let cr = Crud{};
+
+    let ok = cr.insert(&String::from("a"));
+    let mut msg = if ok { String::from("done") } else { String::from("failed") };
+    println!("crud process message: {}", msg);
+    
+    msg = if cr.update(&String::from("any")) { String::from("done") } else { String::from("failed") };
+    println!("crud process message: {}", msg);
+    
+    msg = if cr.delete(&String::from("any")) { String::from("done") } else { String::from("failed") };
+    println!("crud process message: {}", msg);
+
+
+    match cr.select(&String::from("any")) {
+        Option::Some(m) => msg = m,
+        _ => msg = String::from("selection failed")
+    }
+
+    println!("crud selected: {}", msg);
+
+    println!("EOT module_concept__________________________");
+
 }
 
 fn test_vector(){
