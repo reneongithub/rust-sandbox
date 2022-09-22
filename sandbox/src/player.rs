@@ -137,11 +137,7 @@ fn test_vector(){
 
     println!("test vector__________________________");
 
-    let mut vec = Vec::new();
-
-    vec.push("one");
-    vec.push("tow");
-    vec.push("three");
+    let vec = vec!["one", "two", "three"];
 
     for str in &vec {
         println!("{}", str);
@@ -184,10 +180,10 @@ fn extend_string(conv_string: &mut String){
     conv_string.push_str("string_extended;");
 }
 
-fn get_string_by_option(conv_string: &String) -> Option<String> {
+fn get_string_by_option(conv_string: &str) -> Option<String> {
     
     let mut ret = String::from("return String: ");
     ret.push_str(conv_string);
 
-    Option::Some(String::from(ret))
+    Option::Some(ret)
 }

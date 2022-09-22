@@ -25,7 +25,7 @@ impl Crud{
         let mut ret = String::from("selected String: ");
         ret.push_str(value);
     
-        Option::Some(String::from(ret))
+        Option::Some(ret)
     }
 
 }
