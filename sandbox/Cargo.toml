@@ -6,3 +6,10 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+test-module-concept = {version = "0.1.0", path = "../test-module-concept"}
+log = { version = "0.4", features = [ "max_level_debug", "release_max_level_info" ] }
+
+
+[[bin]]
+name = "sandbox"
+path = "src/main.rs"
