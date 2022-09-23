@@ -1,5 +1,16 @@
 [workspace]
 members = [
-    "sdbx_main",
+    "sdbx-main",
     "sdbx-module-concept",
 ]
+
+[profile.dev]
+debug = 2
+opt-level = 0
+overflow-checks = true
+
+[patch.crates-io]
+
+# sdbx
+sdbx-main = { path = "sdbx-main" }
+sdbx-module-concept = { path = "sdbx-module-concept" }
