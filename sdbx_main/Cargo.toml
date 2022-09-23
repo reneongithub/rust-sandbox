@@ -1,15 +1,15 @@
 [package]
-name = "sandbox"
+name = "sdbx_main"
 version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-test-module-concept = {version = "0.1.0", path = "../test-module-concept"}
+sdbx-module-concept = {version = "0.1.0", path = "../sdbx-module-concept"}
 log = { version = "0.4", features = [ "max_level_debug", "release_max_level_info" ] }
 
 
 [[bin]]
-name = "sandbox"
+name = "sdbx_main"
 path = "src/main.rs"

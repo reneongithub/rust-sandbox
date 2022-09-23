@@ -1,5 +1,5 @@
 [workspace]
 members = [
-    "sandbox",
-    "test-module-concept",
+    "sdbx_main",
+    "sdbx-module-concept",
 ]
