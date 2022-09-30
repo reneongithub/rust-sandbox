@@ -18,10 +18,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "sdbx-commons"
+version = "0.1.0"
+
+[[package]]
 name = "sdbx-main"
 version = "0.1.0"
 dependencies = [
  "log",
+ "sdbx-commons",
  "sdbx-module-concept",
 ]
 

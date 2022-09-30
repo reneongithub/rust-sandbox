@@ -1,6 +1,7 @@
 [workspace]
 members = [
     "sdbx-main",
+    "sdbx-commons",
     "sdbx-module-concept",
 ]
 
@@ -13,4 +14,5 @@ overflow-checks = true
 
 # sdbx
 sdbx-main = { path = "sdbx-main" }
+sdbx-commons = { path = "sdbx-commons" }
 sdbx-module-concept = { path = "sdbx-module-concept" }

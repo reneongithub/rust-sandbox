@@ -7,9 +7,10 @@ edition = "2021"
 
 [dependencies]
 sdbx-module-concept = "0.1.0"
+sdbx-commons = "0.1.0"
 log = { version = "0.4", features = [ "max_level_debug", "release_max_level_info" ] }
 
 
 [[bin]]
-name = "sdbx-main"
+name = "rust_sandbox-main"
 path = "src/main.rs"
