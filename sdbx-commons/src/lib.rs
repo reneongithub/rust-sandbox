@@ -1,6 +1,7 @@
 mod traits;
 
 pub use traits::Draw;
+pub use traits::PerformOnSdbx;
 
 // pub trait Draw {
 //     fn draw(&self);
