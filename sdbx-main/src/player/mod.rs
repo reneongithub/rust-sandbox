@@ -1,7 +1,7 @@
 mod games;
 
-use sdbx_commons::PerformOnSdbx;
 use games::*;
+use sdbx_commons::PerformOnSdbx;
 
 pub struct Player {
     pub games: Vec<Box<dyn PerformOnSdbx>>,

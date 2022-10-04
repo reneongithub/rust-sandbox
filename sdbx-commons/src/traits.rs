@@ -5,8 +5,7 @@ pub trait Draw {
 }
 
 pub trait PerformOnSdbx {
-
-    fn run(&self){
+    fn run(&self) {
         let name = self.get_name();
         println!("-- {}: start", name);
         match self.perform() {
@@ -18,5 +17,4 @@ pub trait PerformOnSdbx {
     fn perform(&self) -> Result<(), Error>;
 
     fn get_name(&self) -> &str;
-    
 }
