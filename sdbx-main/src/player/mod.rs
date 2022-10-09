@@ -30,7 +30,7 @@ impl Player {
 
     fn init(player: &mut Player) {
         player.add_game(Box::new(TestErrorHandling {
-            name: String::from("erroe handling test"),
+            name: String::from("error handling test"),
         }));
         player.add_game(Box::new(TestMisc {
             name: String::from("misc testing"),
