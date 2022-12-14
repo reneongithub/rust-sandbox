@@ -2,6 +2,16 @@ use sdbx_commons::PerformOnSdbx;
 use std::cmp::Ordering;
 use std::io::{Error, ErrorKind};
 
+
+enum Any<T> {
+
+    Idle (String),
+    Idle2 {
+        msg: String,
+        any: T
+    },
+}
+
 /* misc testing */
 
 pub struct TestMisc {
@@ -35,15 +45,15 @@ impl PerformOnSdbx for TestErrorHandling {
         &self.name
     }
 
-    fn perform(&self) -> Result<(), std::io::Error> {
+    fn perform(&self) -> Result<(), Error> {
         let index = 41;
         println!("{}", self.name);
 
         if index > 42 {
-            Ok(())
-        } else {
-            Err(Error::new(ErrorKind::Other, "oh no!"))
+            return Err(Error::new(ErrorKind::Other, "oh no!"))
         }
+
+        return Ok(())
     }
 }
 

@@ -16,12 +16,22 @@ impl Player {
         let mut player = Player::new();
         Self::init(&mut player);
         Self::perform(&mut player);
+
+        Self::perform_on_sandbox(TestErrorHandling {
+            name: String::from("error handling test"),
+        })
     }
 
     fn perform(player: &mut Player) {
         for game in &player.games {
             game.run();
         }
+    }
+
+    fn perform_on_sandbox<G>(game: G)
+    where G: PerformOnSdbx
+    {
+        game.run();
     }
 
     pub fn add_game(&mut self, game: Box<dyn PerformOnSdbx>) {
