@@ -1,4 +1,5 @@
 use sdbx_commons::PerformOnSdbx;
+use sdbx_generics_concept::*;
 use std::cmp::Ordering;
 use std::io::{Error, ErrorKind};
 
@@ -147,16 +148,16 @@ impl PerformOnSdbx for TestVector {
     fn get_name(&self) -> &str {
         &self.name
     }
-    
+
     fn perform(&self) -> Result<(), std::io::Error> {
         let vec = vec!["one", "two", "three"];
 
         for str in &vec {
             println!("{}", str);
         }
-        
+
         for i in 0..vec.len() {
-            println!("{} in forinrange:{}", i+1, vec[i]);
+            println!("{} in forinrange:{}", i + 1, vec[i]);
         }
 
         for i in 0..vec.len() + 1 {
@@ -183,20 +184,38 @@ impl PerformOnSdbx for TestVector {
     }
 }
 
-// fn print_to_console(int_to_console: i32, string_to_console: &String) {
-//     println!(
-//         "from console - int_a: {} -- string_a: {}",
-//         int_to_console, string_to_console
-//     );
-// }
+/* test generics concept */
 
-// fn extend_string(conv_string: &mut String) {
-//     conv_string.push_str("string_extended;");
-// }
+pub struct TestGenericsConceptTry {
+    pub name: String,
+}
 
-// fn get_string_by_option(conv_string: &str) -> Option<String> {
-//     let mut ret = String::from("return String: ");
-//     ret.push_str(conv_string);
+impl PerformOnSdbx for TestGenericsConceptTry {
+    fn get_name(&self) -> &str {
+        &self.name
+    }
 
-//     Option::Some(ret)
-// }
+    fn perform(&self) -> Result<(), std::io::Error> {
+        run_generics_try();
+
+        Ok(())
+    }
+}
+
+/* test generics in collection */
+
+pub struct TestGenericsConceptCollection {
+    pub name: String,
+}
+
+impl PerformOnSdbx for TestGenericsConceptCollection {
+    fn get_name(&self) -> &str {
+        &self.name
+    }
+
+    fn perform(&self) -> Result<(), std::io::Error> {
+        run_generics_collection();
+
+        Ok(())
+    }
+}
