@@ -13,11 +13,11 @@ trait PrintFields {
     fn print_all_field(&self) -> Result<(), Error>;
 }
 
-/* Useless */
+/* NoneField */
 
-struct UselessStruct;
+struct NoneFieldStruct;
 
-impl PrintFields for UselessStruct {
+impl PrintFields for NoneFieldStruct {
     fn print_all_field(&self) -> Result<(), Error> {
         Err(Error::new(ErrorKind::Other, "no fields present"))
     }
@@ -77,9 +77,12 @@ where
     }
 }
 
+
+/* Play around */
+
 fn dosome() {
-    let useless = UselessStruct;
-    match useless.print_all_field() {
+    let nonefield = NoneFieldStruct;
+    match nonefield.print_all_field() {
         Ok(()) => println!("done"),
         Err(e) => println!("failed [{}]", e),
     }
@@ -97,7 +100,7 @@ fn dosome() {
     }
 
     let coll: Vec<Rc<dyn PrintFields>> = vec![
-        Rc::new(UselessStruct),
+        Rc::new(NoneFieldStruct),
         Rc::new(OneFieldStruct::new(24)),
         Rc::new(TwoFieldStruct::new(42, 24)),
     ];
@@ -105,7 +108,7 @@ fn dosome() {
     delegate_print_fields_iter(&coll);
 
     let coll: Vec<Arc<dyn PrintFields>> = vec![
-        Arc::new(UselessStruct),
+        Arc::new(NoneFieldStruct),
         Arc::new(OneFieldStruct::new(24)),
         Arc::new(TwoFieldStruct::new(42, 24)),
     ];
@@ -113,18 +116,18 @@ fn dosome() {
     delegate_print_fields_iter(&coll);
 
     let coll: Vec<Box<dyn PrintFields>> = vec![
-        Box::new(UselessStruct),
+        Box::new(NoneFieldStruct),
         Box::new(OneFieldStruct::new(24)),
         Box::new(TwoFieldStruct::new(42, 24)),
     ];
 
     delegate_print_fields_iter(&coll);
 
-    let coll: Vec<&dyn PrintFields> = vec![&useless, &onefield, &twofield];
+    let coll: Vec<&dyn PrintFields> = vec![&nonefield, &onefield, &twofield];
 
     delegate_print_fields_iter(&coll);
 
-    let coll: &[&dyn PrintFields] = &mut [&useless, &onefield, &twofield];
+    let coll: &[&dyn PrintFields] = &mut [&nonefield, &onefield, &twofield];
 
     delegate_print_fields_iter(coll);
 }

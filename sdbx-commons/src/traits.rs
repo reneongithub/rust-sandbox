@@ -3,8 +3,7 @@ use std::io::Error;
 pub trait PerformOnSdbx {
     fn run(&self) {
         let name = self.get_name();
-        println!("");
-        println!("-- {}: start", name);
+        println!("\n-- {}: start", name);
         match self.perform() {
             Ok(()) => println!("-- {}: done", name),
             Err(e) => println!("-- {}: failed [{}]", name, e),
