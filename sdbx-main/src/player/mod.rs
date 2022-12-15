@@ -29,7 +29,8 @@ impl Player {
     }
 
     fn perform_on_sandbox<G>(game: G)
-    where G: PerformOnSdbx
+    where
+        G: PerformOnSdbx,
     {
         game.run();
     }

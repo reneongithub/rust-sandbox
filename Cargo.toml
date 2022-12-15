@@ -3,6 +3,7 @@ members = [
     "sdbx-main",
     "sdbx-commons",
     "sdbx-module-concept",
+    "sdbx-generics-concept",
 ]
 
 [profile.dev]
@@ -16,3 +17,4 @@ overflow-checks = true
 sdbx-main = { path = "sdbx-main" }
 sdbx-commons = { path = "sdbx-commons" }
 sdbx-module-concept = { path = "sdbx-module-concept" }
+sdbx-generics-concept = { path = "sdbx-generics-concept" }

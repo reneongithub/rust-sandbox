@@ -2,16 +2,6 @@ use sdbx_commons::PerformOnSdbx;
 use std::cmp::Ordering;
 use std::io::{Error, ErrorKind};
 
-
-enum Any<T> {
-
-    Idle (String),
-    Idle2 {
-        msg: String,
-        any: T
-    },
-}
-
 /* misc testing */
 
 pub struct TestMisc {
@@ -50,10 +40,10 @@ impl PerformOnSdbx for TestErrorHandling {
         println!("{}", self.name);
 
         if index > 42 {
-            return Err(Error::new(ErrorKind::Other, "oh no!"))
+            return Err(Error::new(ErrorKind::Other, "oh no!"));
         }
 
-        return Ok(())
+        Ok(())
     }
 }
 
@@ -151,20 +141,22 @@ pub struct TestVector {
     pub name: String,
 }
 
+#[allow(clippy::needless_range_loop)]
+#[allow(clippy::single_match)]
 impl PerformOnSdbx for TestVector {
     fn get_name(&self) -> &str {
         &self.name
     }
-
+    
     fn perform(&self) -> Result<(), std::io::Error> {
         let vec = vec!["one", "two", "three"];
 
         for str in &vec {
             println!("{}", str);
         }
-
+        
         for i in 0..vec.len() {
-            println!("forinrange:{}", vec[i]);
+            println!("{} in forinrange:{}", i+1, vec[i]);
         }
 
         for i in 0..vec.len() + 1 {

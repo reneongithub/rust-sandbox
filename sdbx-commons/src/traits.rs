@@ -1,13 +1,12 @@
 use std::io::Error;
 
 pub trait PerformOnSdbx {
-
     fn run(&self) {
         let name = self.get_name();
         println!("-- {}: start", name);
         match self.perform() {
             Ok(()) => println!("-- {}: done", name),
-            Err(e) => println!("-- {}: failed [{}]", name, e.to_string()),
+            Err(e) => println!("-- {}: failed [{}]", name, e),
         }
     }
 
