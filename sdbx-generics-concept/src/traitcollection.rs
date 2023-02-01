@@ -30,8 +30,8 @@ struct OneFieldStruct {
 }
 
 impl OneFieldStruct {
-    pub fn new(val: i32) -> Self {
-        OneFieldStruct { v_a: val }
+    pub fn new(v_a: i32) -> Self {
+        Self { v_a }
     }
 }
 
@@ -51,11 +51,8 @@ struct TwoFieldStruct {
 }
 
 impl TwoFieldStruct {
-    pub fn new(val_a: i32, val_b: i32) -> Self {
-        TwoFieldStruct {
-            v_a: val_a,
-            v_b: val_b,
-        }
+    pub fn new(v_a: i32, v_b: i32) -> Self {
+        Self { v_a, v_b }
     }
 }
 
@@ -76,7 +73,6 @@ where
         self.deref().print_all_field()
     }
 }
-
 
 /* Play around */
 
