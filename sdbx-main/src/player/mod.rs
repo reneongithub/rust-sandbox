@@ -13,9 +13,7 @@ impl Player {
     }
 
     pub fn play() {
-        Self::perform_on_sandbox(TestErrorHandling {
-            name: String::from("error handling test"),
-        });
+        Self::perform_on_sandbox(TestErrorHandling);
 
         let mut player = Player::new();
         Self::init(&mut player);
@@ -40,23 +38,11 @@ impl Player {
     }
 
     fn init(player: &mut Player) {
-        player.add_game(Box::new(TestErrorHandling {
-            name: String::from("error handling test"),
-        }));
-        player.add_game(Box::new(TestMisc {
-            name: String::from("misc testing"),
-        }));
-        player.add_game(Box::new(TestStringPointer {
-            name: String::from("pinter on string testing"),
-        }));
-        player.add_game(Box::new(TestOrdering {
-            name: String::from("ordering testing"),
-        }));
-        player.add_game(Box::new(TestGenericsConceptTry {
-            name: String::from("generics testing"),
-        }));
-        player.add_game(Box::new(TestGenericsConceptCollection {
-            name: String::from("generics collection testing"),
-        }));
+        player.add_game(Box::new(TestErrorHandling));
+        player.add_game(Box::new(TestMisc));
+        player.add_game(Box::new(TestStringPointer));
+        player.add_game(Box::new(TestOrdering));
+        player.add_game(Box::new(TestGenericsConceptTry));
+        player.add_game(Box::new(TestGenericsConceptCollection));
     }
 }

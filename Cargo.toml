@@ -4,6 +4,8 @@ members = [
     "sdbx-commons",
     "sdbx-module-concept",
     "sdbx-generics-concept",
+    "sdbx-macros",
+    "sdbx-macros/introduce-macro-derive",
 ]
 
 [profile.dev]
@@ -18,3 +20,5 @@ sdbx-main = { path = "sdbx-main" }
 sdbx-commons = { path = "sdbx-commons" }
 sdbx-module-concept = { path = "sdbx-module-concept" }
 sdbx-generics-concept = { path = "sdbx-generics-concept" }
+sdbx-macros = { path = "sdbx-macros" }
+introduce-macro-derive = { path = "sdbx-macros/introduce-macro-derive" }

@@ -1,20 +1,44 @@
+use introduce_macro_derive::Introducer;
 use sdbx_commons::PerformOnSdbx;
 use sdbx_generics_concept::*;
+use sdbx_macros::Introducer;
 use std::cmp::Ordering;
 use std::io::{Error, ErrorKind};
+use bitflags::bitflags;
 
-/* misc testing */
+bitflags! {
 
-pub struct TestMisc {
-    pub name: String,
-}
+    pub struct TestFlags: u32 {
 
-impl PerformOnSdbx for TestMisc {
-    fn get_name(&self) -> &str {
-        &self.name
+        const ONE = 0x01;
+        const TWO = 0x02;
+        const THREE = 0x03;
+        const FOUR = 0x04;
     }
 
+}
+
+/* misc testing */
+#[derive(Introducer)]
+pub struct TestMisc;
+
+impl PerformOnSdbx for TestMisc {
     fn perform(&self) -> Result<(), std::io::Error> {
+        let mut owned_string: String = "hello ".to_owned();
+
+        owned_string.push_str(" there");
+
+        println!("got that from getStringByOption: {}", owned_string);
+
+        Ok(())
+    }
+}
+
+#[derive(Introducer)]
+pub struct TestFlags;
+
+impl PerformOnSdbx for TestFlags {
+    fn perform(&self) -> Result<(), Error> {
         let mut owned_string: String = "hello ".to_owned();
 
         owned_string.push_str(" there");
@@ -27,18 +51,12 @@ impl PerformOnSdbx for TestMisc {
 
 /* error handling tests */
 
-pub struct TestErrorHandling {
-    pub name: String,
-}
+#[derive(Introducer)]
+pub struct TestErrorHandling;
 
 impl PerformOnSdbx for TestErrorHandling {
-    fn get_name(&self) -> &str {
-        &self.name
-    }
-
     fn perform(&self) -> Result<(), Error> {
         let index = 41;
-        println!("{}", self.name);
 
         if index > 42 {
             return Err(Error::new(ErrorKind::Other, "oh no!"));
@@ -50,15 +68,10 @@ impl PerformOnSdbx for TestErrorHandling {
 
 /* test pointer on string */
 
-pub struct TestStringPointer {
-    pub name: String,
-}
+#[derive(Introducer)]
+pub struct TestStringPointer;
 
 impl PerformOnSdbx for TestStringPointer {
-    fn get_name(&self) -> &str {
-        &self.name
-    }
-
     fn perform(&self) -> Result<(), std::io::Error> {
         let mut str = String::from("string to trans;");
 
@@ -104,15 +117,10 @@ impl TestStringPointer {
 
 /* test ordering */
 
-pub struct TestOrdering {
-    pub name: String,
-}
+#[derive(Introducer)]
+pub struct TestOrdering;
 
 impl PerformOnSdbx for TestOrdering {
-    fn get_name(&self) -> &str {
-        &self.name
-    }
-
     fn perform(&self) -> Result<(), std::io::Error> {
         let int_a = 1;
 
@@ -138,17 +146,12 @@ impl PerformOnSdbx for TestOrdering {
 
 /* test vector */
 
-pub struct TestVector {
-    pub name: String,
-}
+#[derive(Introducer)]
+pub struct TestVector;
 
 #[allow(clippy::needless_range_loop)]
 #[allow(clippy::single_match)]
 impl PerformOnSdbx for TestVector {
-    fn get_name(&self) -> &str {
-        &self.name
-    }
-
     fn perform(&self) -> Result<(), std::io::Error> {
         let vec = vec!["one", "two", "three"];
 
@@ -186,15 +189,10 @@ impl PerformOnSdbx for TestVector {
 
 /* test generics concept */
 
-pub struct TestGenericsConceptTry {
-    pub name: String,
-}
+#[derive(Introducer)]
+pub struct TestGenericsConceptTry;
 
 impl PerformOnSdbx for TestGenericsConceptTry {
-    fn get_name(&self) -> &str {
-        &self.name
-    }
-
     fn perform(&self) -> Result<(), std::io::Error> {
         run_generics_try();
 
@@ -204,15 +202,10 @@ impl PerformOnSdbx for TestGenericsConceptTry {
 
 /* test generics in collection */
 
-pub struct TestGenericsConceptCollection {
-    pub name: String,
-}
+#[derive(Introducer)]
+pub struct TestGenericsConceptCollection;
 
 impl PerformOnSdbx for TestGenericsConceptCollection {
-    fn get_name(&self) -> &str {
-        &self.name
-    }
-
     fn perform(&self) -> Result<(), std::io::Error> {
         run_generics_collection();
 
