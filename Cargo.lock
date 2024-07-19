@@ -76,10 +76,15 @@ dependencies = [
  "sdbx-generics-concept",
  "sdbx-macros",
  "sdbx-module-concept",
+ "sdbx-shared",
 ]
 
 [[package]]
 name = "sdbx-module-concept"
+version = "0.1.0"
+
+[[package]]
+name = "sdbx-shared"
 version = "0.1.0"
 
 [[package]]
