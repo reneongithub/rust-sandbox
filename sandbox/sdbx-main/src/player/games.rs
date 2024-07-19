@@ -1,10 +1,10 @@
+use bitflags::bitflags;
 use introduce_macro_derive::Introducer;
 use sdbx_commons::PerformOnSdbx;
 use sdbx_generics_concept::*;
 use sdbx_macros::Introducer;
 use std::cmp::Ordering;
 use std::io::{Error, ErrorKind};
-use bitflags::bitflags;
 
 bitflags! {
 
@@ -39,28 +39,33 @@ pub struct TestFlags;
 
 impl PerformOnSdbx for TestFlags {
     fn perform(&self) -> Result<(), Error> {
-
         let mut my_flags = NmbFlags::empty();
 
         macro_rules! check_fag {
             ($insert:expr, $check:expr, $err:expr) => {
                 my_flags.set($insert, true);
-                if !my_flags.contains($check){
-                    return Err(Error::new(ErrorKind::Other, format!("flag failed for {}", $err)));
+                if !my_flags.contains($check) {
+                    return Err(Error::new(
+                        ErrorKind::Other,
+                        format!("flag failed for {}", $err),
+                    ));
                 }
             };
             ($check:expr, $err:expr) => {
-                if !my_flags.contains($check){
-                    return Err(Error::new(ErrorKind::Other, format!("flag failed for {}", $err)));
+                if !my_flags.contains($check) {
+                    return Err(Error::new(
+                        ErrorKind::Other,
+                        format!("flag failed for {}", $err),
+                    ));
                 }
             };
             ($check:expr) => {
-                if !my_flags.contains($check){
+                if !my_flags.contains($check) {
                     return Err(Error::new(ErrorKind::Other, "flag failed for any reason"));
                 }
-            }
+            };
         }
-        
+
         check_fag!(NmbFlags::ONE, NmbFlags::ONE, "NmbFlags::TWO");
         check_fag!(NmbFlags::TWO, NmbFlags::TWO, "NmbFlags::TWO");
         check_fag!(NmbFlags::TWO);
