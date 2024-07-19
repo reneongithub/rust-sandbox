@@ -38,11 +38,12 @@ impl Player {
     }
 
     fn init(player: &mut Player) {
-        player.add_game(Box::new(TestErrorHandling));
-        player.add_game(Box::new(TestMisc));
-        player.add_game(Box::new(TestStringPointer));
-        player.add_game(Box::new(TestOrdering));
-        player.add_game(Box::new(TestGenericsConceptTry));
-        player.add_game(Box::new(TestGenericsConceptCollection));
+        // player.add_game(Box::new(TestErrorHandling));
+        // player.add_game(Box::new(TestMisc));
+        player.add_game(Box::new(TestFlags));
+        // player.add_game(Box::new(TestStringPointer));
+        // player.add_game(Box::new(TestOrdering));
+        // player.add_game(Box::new(TestGenericsConceptTry));
+        // player.add_game(Box::new(TestGenericsConceptCollection));
     }
 }

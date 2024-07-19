@@ -8,12 +8,12 @@ use bitflags::bitflags;
 
 bitflags! {
 
-    pub struct TestFlags: u32 {
+    pub struct NmbFlags: u32 {
 
         const ONE = 0x01;
         const TWO = 0x02;
-        const THREE = 0x03;
-        const FOUR = 0x04;
+        const THREE = 0x04;
+        const FOUR = 0x08;
     }
 
 }
@@ -39,11 +39,31 @@ pub struct TestFlags;
 
 impl PerformOnSdbx for TestFlags {
     fn perform(&self) -> Result<(), Error> {
-        let mut owned_string: String = "hello ".to_owned();
 
-        owned_string.push_str(" there");
+        let mut my_flags = NmbFlags::empty();
 
-        println!("got that from getStringByOption: {}", owned_string);
+        macro_rules! check_fag {
+            ($insert:expr, $check:expr, $err:expr) => {
+                my_flags.set($insert, true);
+                if !my_flags.contains($check){
+                    return Err(Error::new(ErrorKind::Other, format!("flag failed for {}", $err)));
+                }
+            };
+            ($check:expr, $err:expr) => {
+                if !my_flags.contains($check){
+                    return Err(Error::new(ErrorKind::Other, format!("flag failed for {}", $err)));
+                }
+            };
+            ($check:expr) => {
+                if !my_flags.contains($check){
+                    return Err(Error::new(ErrorKind::Other, "flag failed for any reason"));
+                }
+            }
+        }
+        
+        check_fag!(NmbFlags::ONE, NmbFlags::ONE, "NmbFlags::TWO");
+        check_fag!(NmbFlags::TWO, NmbFlags::TWO, "NmbFlags::TWO");
+        check_fag!(NmbFlags::TWO);
 
         Ok(())
     }
