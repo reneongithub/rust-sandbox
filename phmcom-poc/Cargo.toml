@@ -3,3 +3,5 @@
 members = [
   "phmcom-cli"
 ]
+
+resolver = "2"
