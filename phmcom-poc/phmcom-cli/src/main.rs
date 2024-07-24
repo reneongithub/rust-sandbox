@@ -1,6 +1,9 @@
 use clap::{Arg, Command};
+use dotenv::dotenv;
 
-fn main() {
+fn main() -> anyhow::Result<()> {
+    dotenv().ok();
+
     let command = Command::new("Dog Shelter sample application")
         .version("1.0")
         .author("Rene Kuehnemann <rene@wmedia.de>")
@@ -14,4 +17,6 @@ fn main() {
         );
 
     _ = command.get_matches();
+
+    Ok(())
 }
