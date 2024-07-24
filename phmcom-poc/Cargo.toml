@@ -1,7 +1,14 @@
 [workspace]
-
 members = [
   "phmcom-cli"
 ]
 
 resolver = "2"
+
+[profile.dev]
+debug = 2
+opt-level = 0
+overflow-checks = true
+
+[patch.crates-io]
+phmcom-cli = { path = "phmcom-cli" }
