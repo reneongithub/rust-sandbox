@@ -1,22 +1,27 @@
+mod commands;
+
 use clap::Command;
 use dotenv::dotenv;
-use phmcom_cli::commands;
 
 fn main() -> anyhow::Result<()> {
     dotenv().ok();
 
-    let mut cmd = Command::new("phmcom")
+    let command_registry: Vec<Box<dyn commands::RegisterCommand>> = commands::command_registry();
+
+    let mut cmd_root = Command::new("phmcom")
         .version("1.0")
         .author("Rene Kuehnemann <rene@wmedia.de>")
         .about("Lets work on a poc of phmcom in rust");
 
-    cmd = commands::configure_hello(cmd);
-    cmd = commands::configure_greetme(cmd);
+    for command in &command_registry {
+        cmd_root = command.register(cmd_root);
+    }
 
-    let matches = cmd.get_matches();
+    let matches = cmd_root.get_matches();
 
-    commands::handle_hello(&matches)?;
-    commands::handle_greetmee(&matches)?;
+    for command in &command_registry {
+        command.handle(&matches)?;
+    }
 
     Ok(())
 }

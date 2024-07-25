@@ -1,7 +1,15 @@
-mod greetme;
-mod hello;
+pub mod greetings;
+pub mod hello;
 
-pub use greetme::configure as configure_greetme;
-pub use greetme::handle as handle_greetmee;
-pub use hello::configure as configure_hello;
-pub use hello::handle as handle_hello;
+use clap::{ArgMatches, Command};
+use greetings::GreetingCommand;
+use hello::HelloCommand;
+
+pub trait RegisterCommand {
+    fn register(&self, command: Command) -> Command;
+    fn handle(&self, matches: &ArgMatches) -> anyhow::Result<()>;
+}
+
+pub fn command_registry() -> Vec<Box<dyn RegisterCommand>> {
+    vec![Box::new(HelloCommand), Box::new(GreetingCommand)]
+}

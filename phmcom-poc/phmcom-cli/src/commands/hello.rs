@@ -1,13 +1,18 @@
 use clap::{ArgMatches, Command};
 
-pub fn configure(command: Command) -> Command {
-    command.subcommand(Command::new("hello"))
-}
+use super::RegisterCommand;
+pub struct HelloCommand;
 
-pub fn handle(matches: &ArgMatches) -> anyhow::Result<()> {
-    if let Some(_matches) = matches.subcommand_matches("hello") {
-        println!("Hello World!");
+impl RegisterCommand for HelloCommand {
+    fn register(&self, command: Command) -> Command {
+        command.subcommand(Command::new("hello"))
     }
 
-    Ok(())
+    fn handle(&self, matches: &ArgMatches) -> anyhow::Result<()> {
+        if let Some(_matches) = matches.subcommand_matches("hello") {
+            println!("Hello World!");
+        }
+
+        Ok(())
+    }
 }
