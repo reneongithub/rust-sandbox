@@ -12,7 +12,6 @@ impl RegisterCommand for GreetingCommand {
     }
 
     fn handle(&self, matches: &ArgMatches) -> anyhow::Result<bool> {
-        println!("handle : {}", COMMAND_ID);
         Ok(matches
             .subcommand_matches(COMMAND_ID)
             .map_or(false, |_matches| {
