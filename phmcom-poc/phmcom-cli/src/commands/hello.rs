@@ -11,11 +11,13 @@ impl RegisterCommand for HelloCommand {
         command.subcommand(Command::new(COMMAND_ID))
     }
 
-    fn handle(&self, matches: &ArgMatches) -> anyhow::Result<()> {
-        if let Some(_matches) = matches.subcommand_matches(COMMAND_ID) {
-            println!("Hello World!");
-        }
-
-        Ok(())
+    fn handle(&self, matches: &ArgMatches) -> anyhow::Result<bool> {
+        println!("handle : {}", COMMAND_ID);
+        Ok(matches
+            .subcommand_matches(COMMAND_ID)
+            .map_or(false, |_matches| {
+                println!("Hello World!");
+                true
+            }))
     }
 }

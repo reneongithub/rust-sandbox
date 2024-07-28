@@ -12,7 +12,7 @@ const MAIN_COMMAND_AUTHOR: &str = "Rene Kuehnemann <rene@wmedia.de>";
 
 pub trait RegisterCommand {
     fn register(&self, command: Command) -> Command;
-    fn handle(&self, matches: &ArgMatches) -> anyhow::Result<()>;
+    fn handle(&self, matches: &ArgMatches) -> anyhow::Result<bool>;
 }
 
 pub fn main_command() -> Command {

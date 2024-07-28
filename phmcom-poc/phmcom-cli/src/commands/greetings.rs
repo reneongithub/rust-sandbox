@@ -11,14 +11,16 @@ impl RegisterCommand for GreetingCommand {
         command.subcommand(Command::new(COMMAND_ID).arg(Arg::new("name").short('n').long("name")))
     }
 
-    fn handle(&self, matches: &ArgMatches) -> anyhow::Result<()> {
-        if let Some(_matches) = matches.subcommand_matches(COMMAND_ID) {
-            println!(
-                "let me greet you: {}",
-                &_matches.get_one::<String>("name").unwrap()
-            );
-        }
-
-        Ok(())
+    fn handle(&self, matches: &ArgMatches) -> anyhow::Result<bool> {
+        println!("handle : {}", COMMAND_ID);
+        Ok(matches
+            .subcommand_matches(COMMAND_ID)
+            .map_or(false, |_matches| {
+                println!(
+                    "let me greet you: {}",
+                    &_matches.get_one::<String>("name").unwrap()
+                );
+                true
+            }))
     }
 }

@@ -15,7 +15,11 @@ fn main() -> anyhow::Result<()> {
     let matches = cmd_root.get_matches();
 
     for command in &command_config {
-        command.handle(&matches)?;
+        match command.handle(&matches) {
+            Ok(false) => continue,
+            Ok(true) => return Ok(()),
+            Err(e) => return Err(e),
+        }
     }
 
     Ok(())
