@@ -1,7 +1,5 @@
 use clap::{ArgMatches, Command};
 
-// use super::RegisterCommand;
-
 const COMMAND_ID: &str = "hello";
 
 pub struct HelloCommand;
@@ -15,7 +13,7 @@ impl HelloCommand {
         command.subcommand(Command::new(COMMAND_ID))
     }
 
-    pub fn execute_handle(&self, matches: &ArgMatches) -> anyhow::Result<bool> {
+    pub async fn handle(&self, matches: &ArgMatches) -> anyhow::Result<bool> {
         Ok(matches
             .subcommand_matches(COMMAND_ID)
             .map_or(false, |_matches| {

@@ -12,7 +12,7 @@ const MAIN_COMMAND_AUTHOR: &str = "Rene Kuehnemann <rene@wmedia.de>";
 
 macro_rules! handle_command {
     ($cmd:expr, $matches:expr) => {
-        match $cmd.execute_handle($matches) {
+        match $cmd.handle($matches).await {
             Ok(true) => return Ok(()),
             Ok(false) => log::debug!("Command not handled : {}", $cmd.command_id()),
             Err(e) => {
@@ -23,7 +23,7 @@ macro_rules! handle_command {
     };
 }
 
-pub fn command_configuration() -> anyhow::Result<()> {
+pub async fn handle_commands() -> anyhow::Result<()> {
     let mut cmd_root = main_command();
 
     cmd_root = HelloCommand.config(cmd_root);

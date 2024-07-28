@@ -16,7 +16,9 @@ fn main() -> anyhow::Result<()> {
 }
 
 async fn run() -> anyhow::Result<()> {
-    commands::command_configuration()
+    log::info!("Start application");
+
+    commands::handle_commands().await
 }
 
 fn log_format(f: &mut Formatter, record: &Record<'_>) -> Result<(), IoError> {
