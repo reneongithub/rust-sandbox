@@ -1,21 +1,21 @@
 use clap::{Arg, ArgMatches, Command};
 
-use super::RegisterCommand;
+// use super::RegisterCommand;
 
 pub const COMMAND_ID: &str = "greetings";
 
 pub struct GreetingCommand;
 
-impl RegisterCommand for GreetingCommand {
-    fn command_id(&self) -> String {
+impl GreetingCommand {
+    pub fn command_id(&self) -> String {
         COMMAND_ID.to_string()
     }
 
-    fn config(&self, command: Command) -> Command {
+    pub fn config(&self, command: Command) -> Command {
         command.subcommand(Command::new(COMMAND_ID).arg(Arg::new("name").short('n').long("name")))
     }
 
-    fn execute_handle(&self, matches: &ArgMatches) -> anyhow::Result<bool> {
+    pub fn execute_handle(&self, matches: &ArgMatches) -> anyhow::Result<bool> {
         Ok(matches
             .subcommand_matches(COMMAND_ID)
             .map_or(false, |_matches| {

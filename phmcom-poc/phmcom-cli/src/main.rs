@@ -3,37 +3,20 @@ mod commands;
 use env_logger::fmt::Formatter;
 use log::Record;
 use std::io::Error as IoError;
+use tokio::runtime::Builder;
 
 fn main() -> anyhow::Result<()> {
     env_logger::Builder::from_default_env()
         .format(log_format)
         .init();
 
-    log::info!("Application started");
+    let runtime = Builder::new_multi_thread().enable_all().build().unwrap();
 
-    let command_config = commands::command_config();
-    let mut cmd_root = commands::main_command();
+    runtime.block_on(run())
+}
 
-    for command in &command_config {
-        cmd_root = command.config(cmd_root);
-    }
-
-    let matches = cmd_root.get_matches();
-
-    for command in &command_config {
-        match command.handle(&matches) {
-            Ok(false) => continue,
-            Ok(true) => return Ok(()),
-            Err(e) => {
-                log::error!("Executing command failed : {}", e);
-                return Err(e);
-            }
-        }
-    }
-
-    log::warn!("No command found for execute!");
-
-    Ok(())
+async fn run() -> anyhow::Result<()> {
+    commands::command_configuration()
 }
 
 fn log_format(f: &mut Formatter, record: &Record<'_>) -> Result<(), IoError> {
