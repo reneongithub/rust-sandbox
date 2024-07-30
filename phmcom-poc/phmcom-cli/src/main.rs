@@ -15,7 +15,7 @@ fn main() -> anyhow::Result<()> {
 
     let config = config::Configuration::new("my/config/file.toml", APP_PREFIX);
     match config {
-        Ok(c) => println!("configuration : {}", c.database.url),
+        Ok(c) => log::debug!("configuration : {:?}", c),
         Err(e) => log::error!("{}", e),
     }
 
@@ -26,7 +26,6 @@ fn main() -> anyhow::Result<()> {
 
 async fn run() -> anyhow::Result<()> {
     log::info!("Start application");
-    log::debug!("lets check config crate : {}", config::say_hello_config());
 
     commands::handle_commands().await
 }
@@ -35,13 +34,14 @@ fn log_format(f: &mut Formatter, record: &Record<'_>) -> Result<(), IoError> {
     use std::io::Write as _;
 
     let ts = f.timestamp_nanos();
-    let level = f.default_level_style(record.level());
+    let level = record.level();
+    let level_prefix = format!("[{:5}] ", level);
     let module = record.module_path();
     let file = record.file();
     let line = record.line();
     let args = record.args();
 
-    write!(f, "{level:<5} {ts}")?;
+    write!(f, "{}{ts}", level_prefix)?;
     if let Some(module) = module {
         write!(f, " {module}")?;
     }

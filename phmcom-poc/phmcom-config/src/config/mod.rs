@@ -5,10 +5,6 @@ use database::DatabaseConfig;
 use serde::Deserialize;
 use server::ServerConfig;
 
-pub fn say_hello_config() -> String {
-    "hello from config".to_string()
-}
-
 #[derive(Debug, Deserialize, Default)]
 pub struct Configuration {
     pub database: DatabaseConfig,
