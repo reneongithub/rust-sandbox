@@ -6,10 +6,18 @@ use phmcom_config::config;
 use std::io::Error as IoError;
 use tokio::runtime::Builder;
 
+const APP_PREFIX: &str = "PHMCOM";
+
 fn main() -> anyhow::Result<()> {
     env_logger::Builder::from_default_env()
         .format(log_format)
         .init();
+
+    let config = config::Configuration::new("my/config/file.toml", APP_PREFIX);
+    match config {
+        Ok(c) => println!("configuration : {}", c.database.url),
+        Err(e) => log::error!("{}", e),
+    }
 
     let runtime = Builder::new_multi_thread().enable_all().build().unwrap();
 
