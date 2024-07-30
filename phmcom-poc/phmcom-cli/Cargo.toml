@@ -11,6 +11,9 @@ env_logger = "0.11.5"
 log = "0.4.22"
 tokio = { version = "1.39.2", features = ["full"] }
 
+# [phmcom-internal]
+phmcom-config = { version = "0.1.0", path = "../phmcom-config"}
+
 [[bin]]
 name = "phmcom-cli"
 path = "src/main.rs"

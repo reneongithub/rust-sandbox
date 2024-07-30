@@ -302,8 +302,13 @@ dependencies = [
  "dotenv",
  "env_logger",
  "log",
+ "phmcom-config",
  "tokio",
 ]
+
+[[package]]
+name = "phmcom-config"
+version = "0.1.0"
 
 [[package]]
 name = "pin-project-lite"

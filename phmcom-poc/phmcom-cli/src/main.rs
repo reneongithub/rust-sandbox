@@ -2,6 +2,7 @@ mod commands;
 
 use env_logger::fmt::Formatter;
 use log::Record;
+use phmcom_config::config;
 use std::io::Error as IoError;
 use tokio::runtime::Builder;
 
@@ -17,6 +18,7 @@ fn main() -> anyhow::Result<()> {
 
 async fn run() -> anyhow::Result<()> {
     log::info!("Start application");
+    log::debug!("lets check config crate : {}", config::say_hello_config());
 
     commands::handle_commands().await
 }
